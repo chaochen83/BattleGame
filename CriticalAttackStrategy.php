@@ -1,17 +1,15 @@
 <?php
-
+/**
+ * Attack Strategy, for calculating attack damages
+ */
 abstract class AttackStrategy
 {
 	abstract function attack(Candidate $candidate);
 }
 
-// abstract class DefendStrategy
-// {
-// 	abstract function defend(Canditate $canditate);
-// }
-
 /**
- * Implement Critical Attack Strategy:
+ * Critical Attack Strategy: based on candidate's critical points, chance to deal double damages
+ * @return attacker's damage in a fight
  */
 class CriticalAttackStrategy extends AttackStrategy
 {
