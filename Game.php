@@ -40,9 +40,9 @@ class Game implements GameOutputJSON, GameOutputReadable
 		{
 			for($j = $i + 1; $j < $candidates_count; $j++)
 			{
-				// Creating 2 candidates for the game, can add Dodge and Critical as an option:
-				$c1 = new Candidate($this->candidates[$i][0], $this->candidates[$i][1], $this->candidates[$i][2], $this->candidates[$i][3], $this->candidates[$i][4], $this->candidates[$i][5]);
-				$c2 = new Candidate($this->candidates[$j][0], $this->candidates[$j][1], $this->candidates[$j][2], $this->candidates[$j][3], $this->candidates[$i][4], $this->candidates[$i][5]);	
+				// Creating 2 candidates for the game, using Critical Attack as the Attack Strategy:
+				$c1 = new Candidate($this->candidates[$i][0], $this->candidates[$i][1], $this->candidates[$i][2], $this->candidates[$i][3], $this->candidates[$i][4], $this->candidates[$i][5], $this->candidates[$i][6], new CriticalAttackStrategy() );
+				$c2 = new Candidate($this->candidates[$j][0], $this->candidates[$j][1], $this->candidates[$j][2], $this->candidates[$j][3], $this->candidates[$i][4], $this->candidates[$i][5], $this->candidates[$i][6], new CriticalAttackStrategy());	
 
 				// Put the 2 candidates to battle:
 				$battle = new Battle($c1, $c2);

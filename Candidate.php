@@ -14,7 +14,9 @@ class Candidate
 
 	private $fixed_attacks;
 
-	function __construct($name, $health, $damage, $attacks, $dodge=0, $critical=0, $initiative=0)
+	private $attack_strategy;
+
+	function __construct($name, $health, $damage, $attacks, $dodge=0, $critical=0, $initiative=0, AttackStrategy $attack_strategy)
 	{
 		$this->name = $name;
 		$this->health = $health;
@@ -23,15 +25,15 @@ class Candidate
 		$this->dodge = $dodge;
 		$this->critical = $critical;
 		$this->initiative = $initiative;
+
+		$this->attack_strategy = $attack_strategy;
 	}
 
 	function attack()
 	{
 		$this->attacks--;
 
-		$dice = rand(0, 100);
-
-		return $dice < $this->critical ? $this->damage * 2 : $this->damage;	// Implement Critical
+		return $this->attack_strategy->attack($this);	// Implement Attack Strategy
 	}
 
 	function defend($damage)
@@ -63,6 +65,29 @@ class Candidate
 	function resetAttacks()
 	{
 		$this->attacks = $this->fixed_attacks;
+	}
+
+	/**
+	 * For attack / defend strategies:
+	 */
+	function getCritical()
+	{
+		return $this->critical;
+	}
+
+	function getDamage()
+	{
+		return $this->damage;
+	}
+
+	function getDodge()
+	{
+		return $this->dodge;
+	}
+
+	function setHealth($health)
+	{
+		$this->health = $health;
 	}
 }
 
